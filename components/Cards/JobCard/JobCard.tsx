@@ -25,6 +25,7 @@ export default function JobCard({ job, className }: IProps) {
     __html: "",
   });
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const windowScrollY = useRef(0);
   const isExternal = !sanitizeUrl(job.OBJurl).includes("zippia.com");
   const compCoordinates = wrapperRef.current?.getBoundingClientRect();
 
@@ -33,7 +34,14 @@ export default function JobCard({ job, className }: IProps) {
     transform: `translateX(-${compCoordinates?.left! - 24}px)`,
   };
 
+  //This handles the toggle of expansion making sure to scroll to the top of the card
+  // when the user closes the card, so it can continue reading the other cards
   function handleExpand() {
+    if (!isExpanded) {
+      windowScrollY.current = window.scrollY;
+    } else {
+      window.scrollTo(0, windowScrollY.current);
+    }
     setIsExpanded(!isExpanded);
   }
 
@@ -45,7 +53,7 @@ export default function JobCard({ job, className }: IProps) {
     } else {
       setJobDescSanitized({ __html: formatString(job.jobDescription, 300) });
     }
-  }, [isExpanded]);
+  }, [isExpanded, job.jobDescription]);
 
   return (
     <div ref={wrapperRef} className={className}>

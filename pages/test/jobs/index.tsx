@@ -125,7 +125,7 @@ export default function JobListingPage(props: IProps) {
         <h2 className="mb-5 text-center font-sans text-2xl font-medium">
           Jobs available
         </h2>
-        <div className="mb-5 flex justify-center gap-3">
+        <div className="mb-5 flex flex-wrap justify-center gap-3">
           <GenericBtn
             onClick={handleSortByCompanyName}
             color="bg-violet-200 text-stone-800"
