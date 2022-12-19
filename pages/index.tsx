@@ -15,7 +15,7 @@ export default function Home() {
       <Layout>
         <div>
           <div className="grid place-items-center">
-            <Link href="/test/jobs" prefetch>
+            <Link href="/test/jobs">
               <GenericBtn>Check out the jobs available</GenericBtn>
             </Link>
           </div>

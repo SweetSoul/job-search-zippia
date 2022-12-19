@@ -24,7 +24,6 @@ export default function Layout(props: IProps) {
         </Link>
         <div>
           <Link
-            prefetch
             href="/test/jobs"
             className="text-lg font-medium tracking-wide text-white active:underline"
           >
