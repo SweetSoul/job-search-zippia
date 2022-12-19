@@ -26,6 +26,7 @@ export default function JobCard({ job, className }: IProps) {
   });
   const wrapperRef = useRef<HTMLDivElement>(null);
   const windowScrollY = useRef(0);
+  //applying sanitization so we don't have any XSS attacks
   const isExternal = !sanitizeUrl(job.OBJurl).includes("zippia.com");
   const compCoordinates = wrapperRef.current?.getBoundingClientRect();
 
