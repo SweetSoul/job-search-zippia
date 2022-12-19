@@ -58,6 +58,7 @@ export default function JobListingPage(props: IProps) {
   const [jobs, setJobs] = useState<IJob[]>(props?.data?.jobs || []);
   const [filtered, setFiltered] = useState(false);
   const [sorted, setSorted] = useState(false);
+  const [page, setPage] = useState(1);
 
   //Ideally we would sort this using the API
   /**
@@ -113,6 +114,12 @@ export default function JobListingPage(props: IProps) {
     setFiltered(true);
   }
 
+  //pagination being handled on the client side since I do not have access to API pagination
+  // Ideally we would handle this using the API
+  function handleLoadMore() {
+    setPage(page + 1);
+  }
+
   return (
     <>
       <Head>
@@ -163,9 +170,19 @@ export default function JobListingPage(props: IProps) {
         </div>
         <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {!!jobs.length &&
-            jobs.map((job) => {
+            jobs.slice(0, page * 10).map((job) => {
               return <JobCard key={job.jobId} job={job} />;
             })}
+        </div>
+        <div className="mt-5 flex justify-center">
+          {page * 10 < jobs.length && (
+            <GenericBtn
+              onClick={handleLoadMore}
+              color="bg-violet-200 text-stone-800"
+            >
+              Load more
+            </GenericBtn>
+          )}
         </div>
       </Layout>
     </>
