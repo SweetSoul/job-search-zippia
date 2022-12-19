@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Link from "next/link";
+import GenericBtn from "../components/Buttons/Generic/GenericBtn";
 import Layout from "../components/Layout/Layout";
 
 export default function Home() {
@@ -12,7 +14,11 @@ export default function Home() {
       </Head>
       <Layout>
         <div>
-          <div className="flex flex-col"></div>
+          <div className="grid place-items-center">
+            <Link href="/test/jobs" prefetch>
+              <GenericBtn>Check out the jobs available</GenericBtn>
+            </Link>
+          </div>
         </div>
       </Layout>
     </>
