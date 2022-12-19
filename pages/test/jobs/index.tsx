@@ -59,6 +59,13 @@ export default function JobListingPage(props: IProps) {
   const [filtered, setFiltered] = useState(false);
   const [sorted, setSorted] = useState(false);
 
+  //Ideally we would sort this using the API
+  /**
+   * If sorted is true, then setJobs to the props data jobs, setSorted to false, and setFiltered to
+   * false.
+   * If sorted is false, then sort the jobs by company name, setJobs to the sorted jobs, and setSorted
+   * to true
+   */
   function handleSortByCompanyName() {
     if (sorted) {
       setJobs(props?.data?.jobs || []);
@@ -79,6 +86,15 @@ export default function JobListingPage(props: IProps) {
     setSorted(true);
   }
 
+  //Ideally we would filter this using the API
+  /**
+   * If the filtered state is true, then set the jobs state to the props data jobs or an empty array,
+   * set the sorted state to false, set the filtered state to false, and return.
+   *
+   * If the filtered state is false, then set the filteredJobs state to a copy of the jobs state,
+   * filter the filteredJobs state by the difference between today's date and the job's posting date,
+   * and set the jobs state to the filteredJobs state.
+   */
   function handleFilterByLastWeek() {
     if (filtered) {
       setJobs(props?.data?.jobs || []);

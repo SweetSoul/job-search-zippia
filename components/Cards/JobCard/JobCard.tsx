@@ -25,8 +25,17 @@ export default function JobCard({ job, className }: IProps) {
     __html: "",
   });
   const wrapperRef = useRef<HTMLDivElement>(null);
-
   const isExternal = !sanitizeUrl(job.OBJurl).includes("zippia.com");
+  const compCoordinates = wrapperRef.current?.getBoundingClientRect();
+
+  // translating to create the effect (animation) of the card expanding
+  const expandedStyles = {
+    transform: `translateX(-${compCoordinates?.left! - 24}px)`,
+  };
+
+  function handleExpand() {
+    setIsExpanded(!isExpanded);
+  }
 
   //Doing this trick so we can ensure to sanitize the URL
   //while still being able to use server side rendering
@@ -37,16 +46,6 @@ export default function JobCard({ job, className }: IProps) {
       setJobDescSanitized({ __html: formatString(job.jobDescription, 300) });
     }
   }, [isExpanded]);
-
-  const compCoordinates = wrapperRef.current?.getBoundingClientRect();
-
-  const expandedStyles = {
-    transform: `translateX(-${compCoordinates?.left! - 24}px)`,
-  };
-
-  function handleExpand() {
-    setIsExpanded(!isExpanded);
-  }
 
   return (
     <div ref={wrapperRef} className={className}>
